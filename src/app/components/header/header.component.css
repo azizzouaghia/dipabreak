@@ -1,0 +1,25 @@
+/*NavBar Debut*/
+.navbar-brand .navbar-icon {
+    width: 150px;
+}
+.notification-icon {
+    font-size: 18px;
+}
+.language-flag {
+    width: 20px;
+}
+.admin-icon {
+    width: 28px;
+    border-radius: 50%;
+}
+.dropdown-item {
+    background-color: transparent;
+    width: 100px;
+}
+.nav-link:hover {
+    color: #2980b9 !important;
+}
+.dropdown-item:hover {
+    color: #2980b9;
+}
+/*NavBar Fin*/

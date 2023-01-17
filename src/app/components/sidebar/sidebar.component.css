@@ -1,0 +1,39 @@
+.sidebar {
+    width: 200px;
+    height: 400px;
+    margin-top: 40px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 0 15px 15px 0;
+}
+.sidebar-item {
+    list-style-type: none;
+    width: 170px;
+    height: 40px;
+    padding: 10px;
+
+}
+.sidebar-items a :hover {
+    background-color: #3498db15;
+    color: #2980b9;
+}
+.sidebar-item-active {
+    background-color: #3498db33 !important;
+    color: #2980b9;
+}
+.sidebar-item-active ::before {
+    position: absolute;
+    content: "";
+    width: 5px;
+    height: 40px;
+    margin-top: -10px;
+    left: 30px;
+    background-color: #2980b9;
+}
+.sidebar-items  {
+    margin-top: 30px;
+    margin-left: -20px;
+}
+.sidebar-icon {
+    margin-right: 3px;
+}

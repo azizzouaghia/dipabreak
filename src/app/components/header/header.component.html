@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg bg-white">
+    <div class="container-fluid">
+        <!--Logo Debut-->
+        <a class="navbar-brand mx-3" href="#"><img class="navbar-icon" src="/assets/images/logo-no-background.png" alt="" srcset=""></a>
+        <!--Logo Fin-->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+            aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <!--<li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>-->
+            <form class="d-flex mx-5" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            </form>
+            </ul>
+            <ul class="navbar-nav my-2 mx-5 my-lg-0">
+                <!--Language Debut-->
+                <li class="nav-item dropdown mx-4">
+                    <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img class="language-flag" src="/assets/images/usa-flag.png" alt="" srcset=""> English
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><img class="language-flag" src="/assets/images/tn-flag.png" alt="" srcset=""><span class="mx-2">Arabic</span></a></li>
+                        <li><a class="dropdown-item" href="#"><img class="language-flag" src="/assets/images/fr-flag.png" alt="" srcset=""><span class="mx-2">French</span></a></li>
+                        <li>
+                        </li>
+                    </ul>
+                </li>
+                <!--Language Fin-->
+                <!--Notification Debut-->
+                <li class="nav-item dropdown">
+                    <a class="nav-link active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                    <mat-icon matBadge="3" matBadgeSize="small" matBadgeColor="warn">
+                        <fa-icon class="notification-icon" [icon]="notification"></fa-icon>
+                    </mat-icon>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">notif1</a></li> <hr>
+                        <li><a class="dropdown-item" href="#">notif2</a></li>
+                        <li>
+                        </li>
+                    </ul>
+                </li>
+                <!--Notification Fin-->
+                <!--Admin Debut-->
+                <li class="nav-item dropdown mx-4">
+                    <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="/assets/images/admin-icon.jpg" class="mx-1 admin-icon" alt="" srcset=""> Admin
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/profile"><fa-icon [icon]="profile"></fa-icon> Profile</a></li>
+                        <li><a class="dropdown-item" href="/settings"><fa-icon [icon]="settings"></fa-icon> Settings</a></li>
+                        <li><a class="dropdown-item" href="#"><fa-icon [icon]="logout"></fa-icon> Logout</a></li>
+                        <li>
+                        </li>
+                    </ul>
+                </li>
+                <!--Admin Fin-->
+            </ul>
+        </div>
+    </div>
+</nav>
