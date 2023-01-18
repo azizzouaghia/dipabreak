@@ -1,0 +1,7 @@
+app-sidebar {
+    margin-left: 8px;
+    margin-top: -90px !important;
+}
+app-agents,app-clients {
+    margin-left: -100px ;
+}  

@@ -1,0 +1,20 @@
+<mat-grid-list cols="7" rowHeight="100px">
+
+    <mat-grid-tile [colspan]="tiles[0].cols" [rowspan]="tiles[0].rows">
+        <app-sidebar></app-sidebar>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="tiles[3].cols" [rowspan]="tiles[3].rows">
+        <app-infocard></app-infocard>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="tiles[1].cols" [rowspan]="tiles[1].rows">
+        <app-clients></app-clients>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="tiles[2].cols" [rowspan]="tiles[2].rows">
+        <app-agents></app-agents>
+    </mat-grid-tile>
+
+
+</mat-grid-list>

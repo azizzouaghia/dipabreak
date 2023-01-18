@@ -13,6 +13,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AgentsComponent } from './components/agents/agents.component';
+import { InfocardComponent } from './components/infocard/infocard.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +26,9 @@ import { AgentsComponent } from './components/agents/agents.component';
     ClientsComponent,
     SidebarComponent,
     AgentsComponent,
+    InfocardComponent,
+    LoginComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +39,9 @@ import { AgentsComponent } from './components/agents/agents.component';
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatGridListModule,
+    BrowserModule,
     ],
   providers: [],
   bootstrap: [AppComponent]
