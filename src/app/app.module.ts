@@ -18,6 +18,10 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { AddclientComponent } from './components/addclient/addclient.component';
+import { MatButtonModule } from '@angular/material/button';
+import { AddagentComponent } from './components/addagent/addagent.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     InfocardComponent,
     LoginComponent,
     DashboardComponent,
+    AddclientComponent,
+    AddagentComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +48,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatPaginatorModule,
     MatGridListModule,
     BrowserModule,
+    MatDialogModule,
+    MatButtonModule
     ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,7 +3,8 @@
   import {MatSort} from '@angular/material/sort';
   import {MatTableDataSource} from '@angular/material/table';
   import { faCircleInfo, faPenToSquare,faTrash,faPlus} from '@fortawesome/free-solid-svg-icons';
-
+import {MatDialog} from '@angular/material/dialog';
+import { AddclientComponent } from '../addclient/addclient.component';
 
   export interface UserData {
     name: string;
@@ -25,6 +26,11 @@ export class ClientsComponent {
   edit_icon = faPenToSquare;
   delete_icon = faTrash;
   add_icon = faPlus;
+
+//Constructor
+  constructor(private dialog: MatDialog) {
+    this.dataSource = new MatTableDataSource(this.users);
+  }
 //Table
     displayedColumns: string[] = ['name', 'phone', 'registerOn', 'action'];
     dataSource: MatTableDataSource<UserData>;
@@ -49,10 +55,6 @@ export class ClientsComponent {
     }
   ]
 
-    constructor() {
-      this.dataSource = new MatTableDataSource(this.users);
-    }
-
     ngAfterViewInit() {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -66,4 +68,11 @@ export class ClientsComponent {
         this.dataSource.paginator.firstPage();
       }
     }
+//Ajouter,Modifier un client
+  openDialog() {
+    const dialogRef = this.dialog.open(AddclientComponent);
+    dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+    });
+  }
 }

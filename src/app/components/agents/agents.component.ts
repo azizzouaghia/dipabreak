@@ -3,6 +3,8 @@
   import {MatSort} from '@angular/material/sort';
   import {MatTableDataSource} from '@angular/material/table';
   import { faCircleInfo, faPenToSquare,faTrash,faPlus} from '@fortawesome/free-solid-svg-icons';
+import {MatDialog} from '@angular/material/dialog';
+import { AddagentComponent } from '../addagent/addagent.component';
 
   export interface UserData {
     name: string;
@@ -22,7 +24,10 @@ export class AgentsComponent {
   edit_icon = faPenToSquare;
   delete_icon = faTrash;
   add_icon = faPlus;
-
+//Constructor
+  constructor(private dialog: MatDialog) {
+    this.dataSource = new MatTableDataSource(this.users);
+  }
 //Table
     displayedColumns: string[] = ['name', 'phone', 'status', 'action'];
     dataSource: MatTableDataSource<UserData>;
@@ -38,7 +43,7 @@ export class AgentsComponent {
     {
         name:"jeff bezos",
         phone:"121",
-        status:true,
+        status:false,
       },
       {
       name:"mark zu.",
@@ -46,10 +51,6 @@ export class AgentsComponent {
       status:false,
     }
   ]
-
-    constructor() {
-      this.dataSource = new MatTableDataSource(this.users);
-    }
 
     ngAfterViewInit() {
       this.dataSource.paginator = this.paginator;
@@ -63,5 +64,12 @@ export class AgentsComponent {
       if (this.dataSource.paginator) {
         this.dataSource.paginator.firstPage();
       }
-    }
+    }  
+//Ajouter,Modifier un client
+  openDialog() {
+    const dialogRef = this.dialog.open(AddagentComponent);
+    dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+    });
+  }
 }
