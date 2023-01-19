@@ -1,12 +1,20 @@
+fa-icon {
+  font-size: 17px;
+  cursor: pointer;
+}
+.spacing_icon{
+  margin-right: 10px;
+}
+
 .container {
   width: 500px;
-  margin-left: 50px;
 }
-mat-form-field {
-  margin-bottom: -20px;
+.filter {
+  margin-bottom: -25px;
 }
+
 table {
-  width: 80%;
+  width: 100%;
 }
 
 .mat-mdc-form-field {
@@ -16,4 +24,21 @@ table {
 
 td, th {
   width: 25%;
+}
+
+.status{
+  text-align: center;
+  border-radius: 6px;
+  font-size: 15.9px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.btn{
+  width: 40px;
+  height: 30px;
+  margin-top: 15px;
+  padding-top: 3px;
+  margin-right: 2px;
+  margin-left: 4px;
 }

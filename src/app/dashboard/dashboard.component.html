@@ -1,20 +1,24 @@
-<mat-grid-list cols="7" rowHeight="100px">
-
-    <mat-grid-tile [colspan]="tiles[0].cols" [rowspan]="tiles[0].rows">
+<app-header></app-header>
+<div class="row w-100">
+    <div class="col-2">
         <app-sidebar></app-sidebar>
-    </mat-grid-tile>
-
-    <mat-grid-tile [colspan]="tiles[3].cols" [rowspan]="tiles[3].rows">
-        <app-infocard></app-infocard>
-    </mat-grid-tile>
-
-    <mat-grid-tile [colspan]="tiles[1].cols" [rowspan]="tiles[1].rows">
-        <app-clients></app-clients>
-    </mat-grid-tile>
-
-    <mat-grid-tile [colspan]="tiles[2].cols" [rowspan]="tiles[2].rows">
-        <app-agents></app-agents>
-    </mat-grid-tile>
-
-
-</mat-grid-list>
+    </div>
+    <div class="col-10">
+        <div class="dashboard-content">
+            <div class="infocards">
+                <app-infocard color="#297fb98c" backgroundColor="#3498db1a" title="Clients" number="2450" progressBg="bg-info"
+                    progressWidth="70%" iconType="users"></app-infocard>
+                <app-infocard color="#f1c40f" backgroundColor="#f1c40f3a" title="Agents" number="758" progressBg="bg-warning"
+                    progressWidth="40%" iconType="agents"></app-infocard>
+                <app-infocard color="#2ecc71" backgroundColor="#2ecc7025" title="Invoice" number="3952" progressBg="bg-success"
+                    progressWidth="60%" iconType="invoice"></app-infocard>
+                <app-infocard color="#2980b9" backgroundColor="#297fb913" title="Villages" number="2545" progressBg=""
+                    progressWidth="20%" iconType="village"></app-infocard>
+            </div>
+            <div class="tables d-flex mt-5 justify-content-between">
+                <app-clients class="mx-1"></app-clients>
+                <app-agents class="mx-2"></app-agents>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,48 +1,14 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+  import {AfterViewInit, Component, ViewChild} from '@angular/core';
+  import {MatPaginator} from '@angular/material/paginator';
+  import {MatSort} from '@angular/material/sort';
+  import {MatTableDataSource} from '@angular/material/table';
+  import { faCircleInfo, faPenToSquare,faTrash,faPlus} from '@fortawesome/free-solid-svg-icons';
 
   export interface UserData {
-    id: string;
     name: string;
-    progress: string;
-    fruit: string;
+    phone: string;
+    status: boolean;
   }
-
-  /** Constants used to fill up our data base. */
-  const FRUITS: string[] = [
-    'blueberry',
-    'lychee',
-    'kiwi',
-    'mango',
-    'peach',
-    'lime',
-    'pomegranate',
-    'pineapple',
-  ];
-  const NAMES: string[] = [
-    'Maia',
-    'Asher',
-    'Olivia',
-    'Atticus',
-    'Amelia',
-    'Jack',
-    'Charlotte',
-    'Theodore',
-    'Isla',
-    'Oliver',
-    'Isabella',
-    'Jasper',
-    'Cora',
-    'Levi',
-    'Violet',
-    'Arthur',
-    'Mia',
-    'Thomas',
-    'Elizabeth',
-  ];
-
 
 @Component({
   selector: 'app-agents',
@@ -51,18 +17,38 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class AgentsComponent {
 
-      displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
+//Action Icons
+  moreDetails_icon = faCircleInfo;
+  edit_icon = faPenToSquare;
+  delete_icon = faTrash;
+  add_icon = faPlus;
+
+//Table
+    displayedColumns: string[] = ['name', 'phone', 'status', 'action'];
     dataSource: MatTableDataSource<UserData>;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator ;
     @ViewChild(MatSort) sort!: MatSort ;
 
-    constructor() {
-      // Create 100 users
-      const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+    users : UserData[]=[{
+      name:"elon musk",
+      phone:"146",
+      status:true,
+    },
+    {
+        name:"jeff bezos",
+        phone:"121",
+        status:true,
+      },
+      {
+      name:"mark zu.",
+      phone:"49",
+      status:false,
+    }
+  ]
 
-      // Assign the data to the data source for the table to render
-      this.dataSource = new MatTableDataSource(users);
+    constructor() {
+      this.dataSource = new MatTableDataSource(this.users);
     }
 
     ngAfterViewInit() {
@@ -78,21 +64,4 @@ export class AgentsComponent {
         this.dataSource.paginator.firstPage();
       }
     }
-  }
-
-  /** Builds and returns a new User. */
-  function createNewUser(id: number): UserData {
-    const name =
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-      ' ' +
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-      '.';
-
-    return {
-      id: id.toString(),
-      name: name,
-      progress: Math.round(Math.random() * 100).toString(),
-      fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
-    };
-
 }

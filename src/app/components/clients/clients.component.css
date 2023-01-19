@@ -1,10 +1,18 @@
+fa-icon {
+  font-size: 17px;
+  cursor: pointer;
+}
+.spacing_icon{
+  margin-right: 10px;
+}
+
 .container {
   width: 500px;
-  margin-left: 50px;
 }
-mat-form-field {
-  margin-bottom: -20px;
+.filter {
+  margin-bottom: -25px;
 }
+
 table {
   width: 100%;
 }
@@ -16,4 +24,13 @@ table {
 
 td, th {
   width: 25%;
+}
+
+.btn{
+  width: 40px;
+  height: 30px;
+  margin-top: 15px;
+  padding-top: 3px;
+  margin-right: 2px;
+  margin-left: 4px;
 }

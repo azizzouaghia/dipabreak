@@ -1,22 +1,26 @@
-<div class="container">
-    <mat-form-field>
-        <mat-label>Search By Name</mat-label>
-        <input matInput (keyup)="applyFilter($event)" #input>
-    </mat-form-field>
-
-    <div class="mat-elevation-z8">
+<div class="container p-3 card">
+    <div class="filter">
+        <mat-form-field>
+            <mat-label>Search In Agents</mat-label>
+            <input matInput (keyup)="applyFilter($event)" #input>
+        </mat-form-field>
+    </div>
+    <div>
         <table mat-table [dataSource]="dataSource" matSort>
 
-            <!-- ID Column -->
-            <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-                <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+            <!-- Phone Column -->
+            <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
+                <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
             </ng-container>
 
-            <!-- Progress Column -->
-            <ng-container matColumnDef="progress">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress </th>
-                <td mat-cell *matCellDef="let row"> {{row.progress}}% </td>
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                <td mat-cell *matCellDef="let row"> 
+                    <h4 *ngIf="row.status" style="color:#27ae60;background-color: #2ecc701a;" class="status">Active</h4>
+                    <h4 *ngIf="!row.status" style="color:#e74c3c;background-color: rgba(231, 77, 60, 0.082);" class="status">Inactive</h4>
+                </td>
             </ng-container>
 
             <!-- Name Column -->
@@ -25,10 +29,15 @@
                 <td mat-cell *matCellDef="let row"> {{row.name}} </td>
             </ng-container>
 
-            <!-- Fruit Column -->
-            <ng-container matColumnDef="fruit">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fruit </th>
-                <td mat-cell *matCellDef="let row"> {{row.fruit}} </td>
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                <td mat-cell *matCellDef="let row">
+                    <fa-icon title="more details" style="color:#3498db" class="spacing_icon"
+                        [icon]="moreDetails_icon"></fa-icon>
+                    <fa-icon title="edit" style="color:#e67e22" class="spacing_icon" [icon]="edit_icon"></fa-icon>
+                    <fa-icon title="remove" style="color:#e74c3c" [icon]="delete_icon"></fa-icon>
+                </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -40,6 +49,11 @@
             </tr>
         </table>
 
+    <div class="tableFooter d-flex">
+        <button type="button" class="btn btn-outline-success">
+            <fa-icon class="add_icon" [icon]="add_icon"></fa-icon>
+        </button>
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </div>
     </div>
 </div>

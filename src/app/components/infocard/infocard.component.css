@@ -1,0 +1,26 @@
+.card {
+    text-align: center;
+    border-color: white ;
+}
+fa-icon,.info {
+    display: block;
+}
+.info .title{
+    color: #34495e;
+    font-weight: 500;
+}
+.info .number{
+    color: #34495e;
+    font-weight: 500;
+    margin-top: -20px;
+}
+.progress {
+    margin-top: -12px;
+    height: 7px !important;
+}
+fa-icon {
+    font-size: 30px ;
+    padding: 10px;
+    border-radius: 8px;
+    margin:5px;
+}

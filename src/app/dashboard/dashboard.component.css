@@ -1,7 +1,26 @@
-app-sidebar {
-    margin-left: 8px;
-    margin-top: -90px !important;
+app-header {
+    position: fixed;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+} 
+.dashboard-content {
+    margin-top: 80px;
 }
-app-agents,app-clients {
-    margin-left: -100px ;
-}  
+app-sidebar {
+    position: fixed;
+    top: 70px;
+    left: 0;
+}
+app-clients,app-agents {
+    padding: 0px 15px;
+}
+app-infocard {
+    display: inline-flex;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+.tables{
+    margin-bottom: 50px;
+}
