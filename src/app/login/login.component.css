@@ -67,7 +67,7 @@ body{
  }
  .txt_field input:focus ~ span::before,
  .txt_field input:valid ~ span::before{
-    width:100%.
+    width:100%;
  }
  .pass{
     margin: -5px 0 20px 5px;
