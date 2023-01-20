@@ -1,2 +1,13 @@
-<app-dashboard *ngIf="showHeader"></app-dashboard>
-<router-outlet></router-outlet>
+<div>
+<app-header></app-header>
+<div class="row w-100">
+    <div class="col-2">
+        <app-sidebar [showdashboard]='showdashboard' [showservices]='showservices'></app-sidebar>
+    </div>
+    <div class="col-10">
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+</div>

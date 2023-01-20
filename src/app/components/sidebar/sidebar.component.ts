@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { faBell, faUser,faGear, faRightFromBracket,faHouse,faComment} from '@fortawesome/free-solid-svg-icons';
+import { Component, Input} from '@angular/core';
+import { faBell, faUser,faGear, faRightFromBracket,faHouse,faComment,faSquarePlus} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,4 +13,8 @@ export class SidebarComponent {
   logout = faRightFromBracket
   dashboard = faHouse
   chat = faComment
+  service = faSquarePlus
+  @Input() showdashboard  :boolean = true;
+  @Input() showservices  :boolean = true;
+  
 }

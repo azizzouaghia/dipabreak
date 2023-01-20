@@ -1,0 +1,11 @@
+<div class="filter d-flex">
+<input type="text" [(ngModel)]="filters.filters[this.column].value" class="form-control">
+    <mat-chip-listbox (change)="updateMatchMode($event)" aria-label="Fish selection">
+        <mat-chip-option>Start with</mat-chip-option>
+        <mat-chip-option>Contains</mat-chip-option>
+        <mat-chip-option>Not Contains</mat-chip-option>
+        <mat-chip-option>Ends with</mat-chip-option>
+        <mat-chip-option>Equal</mat-chip-option>
+        <mat-chip-option>Not Equal</mat-chip-option>
+    </mat-chip-listbox>
+</div>

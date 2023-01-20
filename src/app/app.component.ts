@@ -8,11 +8,13 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class AppComponent  {
   title = 'dipabreak';
-  showHeader = true;
-  
+  showdashboard:boolean = true;
+  showservices:boolean = true;
+
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
-      this.showHeader = this.router.url !== '/login';
+      this.showdashboard = this.router.url == '/dashboard';
+      this.showservices = this.router.url == '/services';
     });
   }
 }

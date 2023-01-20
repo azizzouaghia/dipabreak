@@ -1,0 +1,93 @@
+<div class="container p-3 card">
+    <app-filter *ngIf="showFilter" [column]="selectedColumn"></app-filter>
+    <div>
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Id
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+            </ng-container>
+
+            <!-- NAME Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> 
+                    Name 
+                    <fa-icon
+                        [ngStyle]="{color:selectedColumn==='name'?'#3498db':'black'}"
+                        class="filter_icon" [icon]="filter_icon" (click)="showFilter = !showFilter"
+                        (click)="updateSelectedColumn('name')"></fa-icon>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+            </ng-container>
+
+            <!-- DESCRIPTION Column -->
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> 
+                    Desc.
+                    <fa-icon
+                        [ngStyle]="{color:selectedColumn==='description'?'#3498db':'black'}"
+                        class="filter_icon" [icon]="filter_icon" (click)="showFilter = !showFilter"
+                        (click)="updateSelectedColumn('description')"></fa-icon>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+            </ng-container>
+
+            <!-- PRICE Column -->
+            <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> 
+                    Price 
+                    <fa-icon 
+                        [ngStyle]="{color:selectedColumn==='price'?'#3498db':'black'}"
+                        class="filter_icon" [icon]="filter_icon" (click)="showFilter = !showFilter"
+                        (click)="updateSelectedColumn('price')"></fa-icon>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.price}} </td>
+            </ng-container>
+
+            <!-- DateCreated Column -->
+            <ng-container matColumnDef="dateCreated">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> 
+                    Date
+                    <fa-icon
+                        [ngStyle]="{color:selectedColumn==='dateCreated'?'#3498db':'black'}"
+                        class="filter_icon" [icon]="filter_icon" (click)="showFilter = !showFilter"
+                        (click)="updateSelectedColumn('dateCreated')"></fa-icon>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.dateCreated}} </td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                <td mat-cell *matCellDef="let row">
+                    <fa-icon title="more details" style="color:#3498db" class="spacing_icon"
+                        [icon]="moreDetails_icon"></fa-icon>
+                    <fa-icon title="edit" style="color:#e67e22" class="spacing_icon" [icon]="edit_icon"></fa-icon>
+                    <fa-icon title="remove" style="color:#e74c3c" [icon]="delete_icon"></fa-icon>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+        <div class="tableFooter">
+            <nav>
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link"> < </a></li>
+                    <li class="page-item"><a class="page-link">1</a></li>
+                    <li class="page-item"><a class="page-link">2</a></li>
+                    <li class="page-item"><a class="page-link">3</a></li>
+                    <li class="page-item"><a class="page-link">4</a></li>
+                    <li class="page-item"><a class="page-link">5</a></li>
+                    <li class="page-item disabled"><a class="page-link">..</a></li>
+                    <li class="page-item"><a class="page-link">99</a></li>
+                    <li class="page-item"><a class="page-link"> > </a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
