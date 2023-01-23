@@ -3,8 +3,8 @@
   import {MatSort} from '@angular/material/sort';
   import {MatTableDataSource} from '@angular/material/table';
   import { faCircleInfo, faPenToSquare,faTrash,faPlus} from '@fortawesome/free-solid-svg-icons';
-import {MatDialog} from '@angular/material/dialog';
-import { AddagentComponent } from '../addagent/addagent.component';
+  import {MatDialog} from '@angular/material/dialog';
+  import { AddagentComponent } from '../addagent/addagent.component';
 
   export interface UserData {
     name: string;

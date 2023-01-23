@@ -63,8 +63,6 @@
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                 <td mat-cell *matCellDef="let row">
-                    <fa-icon title="more details" style="color:#3498db" class="spacing_icon"
-                        [icon]="moreDetails_icon"></fa-icon>
                     <fa-icon title="edit" style="color:#e67e22" class="spacing_icon" [icon]="edit_icon"></fa-icon>
                     <fa-icon title="remove" style="color:#e74c3c" [icon]="delete_icon"></fa-icon>
                 </td>
@@ -72,7 +70,6 @@
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
         </table>
         <div class="tableFooter">
             <nav>
@@ -88,6 +85,10 @@
                     <li class="page-item"><a class="page-link"> > </a></li>
                 </ul>
             </nav>
+        <button (click)="openDialog()" type="button" class="btn Addbtn btn-outline-success d-flex">
+            <fa-icon class="add_icon" [icon]="add_icon"></fa-icon>
+            <p>Add Service</p>
+        </button>
         </div>
     </div>
 </div>

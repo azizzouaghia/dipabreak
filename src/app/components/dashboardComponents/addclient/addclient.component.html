@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>Add Client</h2>
+<mat-dialog-content class="mat-typography">
+<!--Forum Debut-->
+<div class="container">
+
+  <label for="inputName" class="form-label">Name</label>
+  <input type="text" id="inputName" class="form-control">
+
+  <label for="inputEmail" class="form-label">Email</label>
+  <input type="email" id="inputEmail" class="form-control">
+
+  <label for="inputPhone" class="form-label">Phone</label>
+  <input type="number" id="inputPhone" class="form-control">
+
+  <label for="inputAge" class="form-label">Age</label>
+  <input type="number" id="inputAge" class="form-control">
+
+  <label for="inputRegion" class="form-label">Region</label>
+  <input type="text" id="inputRegion" class="form-control">
+
+  <label for="inputPassword" class="form-label">Password</label>
+  <input type="password" id="inputPassword" class="form-control">
+
+  <div class="status d-flex">
+    <label class="form-label">Status : </label>
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+    </div>
+  </div>
+
+
+</div>
+<!--Forum Fin-->
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Add</button>
+</mat-dialog-actions>

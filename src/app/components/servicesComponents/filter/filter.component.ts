@@ -6,16 +6,16 @@ interface columnFilter {
   value: string;
   matchMode: string;
 }
-interface Filters {
-  first: string;
-  rows: string;
-  filters: {
-    name: columnFilter;
-    description: columnFilter;
-    price: columnFilter;
-    dateCreated: columnFilter;
+  interface Filters {
+    first: string;
+    rows: string;
+    filters: {
+      name: columnFilter;
+      description: columnFilter;
+      price: columnFilter;
+      dateCreated: columnFilter;
+    }
   }
-}
 
 export { Filters, FilterKeys };
 
