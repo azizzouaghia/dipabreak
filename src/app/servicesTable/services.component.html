@@ -1,4 +1,4 @@
-<div class="container p-3 card">
+<div class="container p-3 card" *ngIf="services.length > 0">
     <app-filter *ngIf="showFilter" [column]="selectedColumn"></app-filter>
     <div>
         <table mat-table [dataSource]="dataSource" matSort>
@@ -8,7 +8,7 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                     Id
                 </th>
-                <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                <td mat-cell *matCellDef="let row"> {{row.serviceId}} </td>
             </ng-container>
 
             <!-- NAME Column -->
@@ -47,8 +47,8 @@
                 <td mat-cell *matCellDef="let row"> {{row.price}} </td>
             </ng-container>
 
-            <!-- DateCreated Column -->
-            <ng-container matColumnDef="dateCreated">
+            <!-- createdDate Column -->
+            <ng-container matColumnDef="createdDate">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> 
                     Date
                     <fa-icon
@@ -56,7 +56,7 @@
                         class="filter_icon" [icon]="filter_icon" (click)="showFilter = !showFilter"
                         (click)="updateSelectedColumn('dateCreated')"></fa-icon>
                 </th>
-                <td mat-cell *matCellDef="let row"> {{row.dateCreated}} </td>
+                <td mat-cell *matCellDef="let row"> {{row.createdDate}} </td>
             </ng-container>
 
             <!-- Action Column -->

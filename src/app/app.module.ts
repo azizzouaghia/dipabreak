@@ -17,6 +17,8 @@ import { AddagentComponent } from './components/dashboardComponents/addagent/add
 import { ServicesComponent } from './servicesTable/services.component';
 import { FilterComponent } from './components/servicesComponents/filter/filter.component';
 import { AddServiceComponent } from './components/servicesComponents/add-service/add-service.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -40,9 +42,11 @@ import { AddServiceComponent } from './components/servicesComponents/add-service
     FontAwesomeModule,
     BrowserAnimationsModule,
     BrowserModule,
-    angularMaterialModule
-    ],
+    angularMaterialModule,
+    HttpClientModule,
+    FormsModule,
+  ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
