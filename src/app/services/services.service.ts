@@ -10,9 +10,9 @@ import { service } from '../models/service.module';
 export class ServicesService {
   url = 'services';
   constructor(private http: HttpClient) {}
-  //Obtenir Tous Les Services
-  public getServices(): Observable<service[]> {
-    return this.http.get<service[]>(`${environment.apiUrl}/${this.url}`);
+  //Obtenir Le Nombre De Services
+  public getNombreServices(): Observable<number> {
+    return this.http.get<number>(`${environment.apiUrl}/${this.url}`);
   }
   //Modifier Une Service
   public updateService(service: service): Observable<service[]> {
@@ -22,16 +22,18 @@ export class ServicesService {
     );
   }
   //Supprimer Une Service
-  public deleteEmployee(service: service): Observable<service[]> {
-    return this.http.delete<service[]>(
-      `${environment.apiUrl}/${this.url}/${service.serviceId}`
-    );
-  }
+
   //Cree Une Service
-  public createEmployee(service: service): Observable<service[]> {
+  public createService(service: service): Observable<service[]> {
     return this.http.post<service[]>(
       `${environment.apiUrl}/${this.url}`,
       service
+    );
+  }
+  //Obtenir Les Services Avec Filter
+  public getCustomServices(customFilter: object): Observable<service[]> {
+    return this.http.get<service[]>(
+      `${environment.apiUrl}/${this.url}/filter/${JSON.stringify(customFilter)}`
     );
   }
 }

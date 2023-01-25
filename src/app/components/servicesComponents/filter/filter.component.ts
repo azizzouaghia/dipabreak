@@ -7,14 +7,14 @@ interface columnFilter {
   matchMode: string;
 }
   interface Filters {
-    first: string;
-    rows: string;
+    first: number;
+    rows: number;
     filters: {
       name: columnFilter;
       description: columnFilter;
       price: columnFilter;
-      dateCreated: columnFilter;
-    }
+      createdDate: columnFilter;
+    };
   }
 
 export { Filters, FilterKeys };
@@ -22,19 +22,19 @@ export { Filters, FilterKeys };
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.css']
+  styleUrls: ['./filter.component.css'],
 })
 export class FilterComponent {
   @Input() column!: FilterKeys;
 
   filters: Filters = {
-    first: "",
-    rows: "",
+    first: 0,
+    rows: 10,
     filters: {
-      name: { value: "", matchMode: "" },
-      description: { value: "", matchMode: "" },
-      price: { value: "", matchMode: "" },
-      dateCreated: { value: "", matchMode: "" }
+      name: { value: '', matchMode: '' },
+      description: { value: '', matchMode: '' },
+      price: { value: '', matchMode: '' },
+      createdDate: { value: '', matchMode: '' },
     }
   };
 
@@ -42,5 +42,4 @@ export class FilterComponent {
     this.filters.filters[this.column].matchMode = event.value;
     console.log(this.filters);
   }
-
 }

@@ -44,7 +44,7 @@
                         class="filter_icon" [icon]="filter_icon" (click)="showFilter = !showFilter"
                         (click)="updateSelectedColumn('price')"></fa-icon>
                 </th>
-                <td mat-cell *matCellDef="let row"> {{row.price}} </td>
+                <td mat-cell *matCellDef="let row"> {{row.price}}$ </td>
             </ng-container>
 
             <!-- createdDate Column -->
@@ -52,7 +52,7 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> 
                     Date
                     <fa-icon
-                        [ngStyle]="{color:selectedColumn==='dateCreated'?'#3498db':'black'}"
+                        [ngStyle]="{color:selectedColumn==='createdDate'?'#3498db':'black'}"
                         class="filter_icon" [icon]="filter_icon" (click)="showFilter = !showFilter"
                         (click)="updateSelectedColumn('dateCreated')"></fa-icon>
                 </th>
@@ -63,8 +63,8 @@
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                 <td mat-cell *matCellDef="let row">
-                    <fa-icon title="edit" style="color:#e67e22" class="spacing_icon" [icon]="edit_icon"></fa-icon>
-                    <fa-icon title="remove" style="color:#e74c3c" [icon]="delete_icon"></fa-icon>
+                    <fa-icon (click)="editService(row);openDialog()" title="edit" style="color:#e67e22" class="spacing_icon" [icon]="edit_icon"></fa-icon>
+                    <fa-icon (click)="deleteService(row);openDialog()" title="remove" style="color:#e74c3c" [icon]="delete_icon"></fa-icon>
                 </td>
             </ng-container>
 
@@ -74,18 +74,14 @@
         <div class="tableFooter">
             <nav>
                 <ul class="pagination">
-                    <li class="page-item"><a class="page-link"> < </a></li>
-                    <li class="page-item"><a class="page-link">1</a></li>
-                    <li class="page-item"><a class="page-link">2</a></li>
-                    <li class="page-item"><a class="page-link">3</a></li>
-                    <li class="page-item"><a class="page-link">4</a></li>
-                    <li class="page-item"><a class="page-link">5</a></li>
-                    <li class="page-item disabled"><a class="page-link">..</a></li>
-                    <li class="page-item"><a class="page-link">99</a></li>
-                    <li class="page-item"><a class="page-link"> > </a></li>
+                    <li *ngIf="(currentPage-1)>=1" class="page-item"><a (click)="changePage(currentPage-1)" class="page-link"> < </a></li>
+                        <li class="page-item" *ngFor="let i of pages; let idx = index">
+                            <a (click)="changePage(i)" [ngClass]="{'active': i === currentPage}" class="page-link">{{ i }}</a>
+                        </li>
+                    <li *ngIf="(currentPage+1)<=numberOfPages" class="page-item"><a (click)="changePage(currentPage+1)" class="page-link"> > </a></li>
                 </ul>
             </nav>
-        <button (click)="openDialog()" type="button" class="btn Addbtn btn-outline-success d-flex">
+        <button (click)="initService();openDialog()" type="button" class="btn Addbtn btn-outline-success d-flex">
             <fa-icon class="add_icon" [icon]="add_icon"></fa-icon>
             <p>Add Service</p>
         </button>

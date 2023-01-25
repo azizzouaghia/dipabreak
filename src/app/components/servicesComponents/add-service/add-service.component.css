@@ -1,11 +1,13 @@
 amat-dialog-content {
-    color: black !important;
+    color: black;
 }
-
 input,textarea{
     margin-bottom: 15px;
 }
-
 .form-check {
     margin-left: 25px;
+}
+.areyousure{
+    margin-top: -5px;
+    margin-left: 5px;
 }
