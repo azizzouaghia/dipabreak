@@ -22,6 +22,11 @@ export class ServicesService {
     );
   }
   //Supprimer Une Service
+  public deleteService(service: service) {
+    return this.http.delete<service[]>(
+      `${environment.apiUrl}/${this.url}/${service.serviceId}`
+    );
+  }
 
   //Cree Une Service
   public createService(service: service): Observable<service[]> {

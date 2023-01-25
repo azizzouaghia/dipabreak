@@ -1,7 +1,8 @@
 <h2 *ngIf="!serviceToEdit.serviceId && !serviceToDelete" mat-dialog-title>Add Service</h2>
 <h2 *ngIf="serviceToEdit.serviceId && !serviceToDelete" mat-dialog-title>Edit Service</h2>
+<h2 *ngIf="serviceToDelete" mat-dialog-title>Delete Service</h2>
 
-<mat-dialog-content  class="mat-typography">
+<mat-dialog-content *ngIf="!serviceToDelete" class="mat-typography">
     <!--Forum Debut-->
     <div class="container">
     <label *ngIf="serviceToEdit" [(ngModel)]="serviceToEdit.name" for="inputName" class="form-label">Name</label>
@@ -33,5 +34,6 @@
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
     <button mat-button (click)="createService(serviceToEdit)" *ngIf="!serviceToEdit.serviceId && !serviceToDelete" [mat-dialog-close]="true" cdkFocusInitial>Add</button>
+    <button mat-button (click)="deleteService(serviceToEdit)" [mat-dialog-close]="true" *ngIf="serviceToDelete" cdkFocusInitial>Delete</button>
     <button mat-button (click)="updateService(serviceToEdit)" [mat-dialog-close]="true" *ngIf="serviceToEdit.serviceId && !serviceToDelete" cdkFocusInitial>Save</button>
 </mat-dialog-actions>

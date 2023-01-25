@@ -9,3 +9,7 @@ app-infocard {
 .tables{
     margin-bottom: 50px;
 }
+table {
+    width: 50%;
+  }
+ 

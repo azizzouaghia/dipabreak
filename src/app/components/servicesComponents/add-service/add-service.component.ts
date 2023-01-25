@@ -37,6 +37,9 @@ export class AddServiceComponent {
     this.servicesService.updateService(service).subscribe();
   }
   //Supprimer Une Service
+  deleteService(service: service) {
+    this.servicesService.deleteService(service).subscribe();
+  }
 
   //Cree Une Service
   createService(service: service) {
