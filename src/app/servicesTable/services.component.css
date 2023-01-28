@@ -61,3 +61,8 @@ td, th {
 .Addbtn p {
   margin-left: 2px;
 }
+.nothingFound{
+  text-align: center;
+  margin-top: 20px;
+  color: #95a5a6;
+}

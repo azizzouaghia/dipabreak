@@ -1,5 +1,6 @@
 import { Component, Input ,EventEmitter} from '@angular/core';
-
+import { FilterService } from 'src/app/services/filter.service';
+import { ServicesComponent } from 'src/app/servicesTable/services.component';
 type FilterKeys = keyof Filters['filters'];
 
 interface columnFilter {
@@ -26,20 +27,17 @@ export { Filters, FilterKeys };
 })
 export class FilterComponent {
   @Input() column!: FilterKeys;
+  filters!: Filters;
 
-  filters: Filters = {
-    first: 0,
-    rows: 10,
-    filters: {
-      name: { value: '', matchMode: '' },
-      description: { value: '', matchMode: '' },
-      price: { value: '', matchMode: '' },
-      createdDate: { value: '', matchMode: '' },
-    }
-  };
+  constructor(
+    private filterService: FilterService,
+    private servicesComponent: ServicesComponent
+  ) {
+    this.filters = this.filterService.filters;
+  }
 
   updateMatchMode(event: any) {
     this.filters.filters[this.column].matchMode = event.value;
-    console.log(this.filters);
+    this.servicesComponent.changePage(1);
   }
 }

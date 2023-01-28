@@ -1,4 +1,4 @@
-<div class="container p-3 card" *ngIf="services.length > 0">
+<div class="container p-3 card">
     <app-filter *ngIf="showFilter" [column]="selectedColumn"></app-filter>
     <div>
         <table mat-table [dataSource]="dataSource" matSort>
@@ -71,8 +71,9 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <h1 *ngIf="servicesLength<=0" class="nothingFound">Nothing Found</h1>
         <div class="tableFooter">
-            <nav>
+            <nav *ngIf="servicesLength>0">
                 <ul class="pagination">
                     <li *ngIf="(currentPage-1)>=1" class="page-item"><a (click)="changePage(currentPage-1)" class="page-link"> < </a></li>
                         <li class="page-item" *ngFor="let i of pages; let idx = index">

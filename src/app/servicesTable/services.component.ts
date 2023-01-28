@@ -6,6 +6,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddServiceComponent } from '../components/servicesComponents/add-service/add-service.component';
 import { ServicesService } from '../services/services.service';
 import { service } from '../models/service.module';
+import { environment } from 'src/environments/environment';
+import { FilterService } from '../services/filter.service';
+import { Response } from '../models/response.module';
 
 @Component({
   selector: 'app-services',
@@ -14,13 +17,14 @@ import { service } from '../models/service.module';
 })
 export class ServicesComponent {
 
-
   //Les Variables
   services: service[] = [];
   serviceToEdit?: service;
   serviceToDelete: boolean = false;
-  rows = 3;
+  rows = environment.rows;
   numberOfPages = 0;
+  servicesLength = 0;
+
   //Services Fonction
   updateServicesList(services: service[]) {
     this.services = services;
@@ -36,36 +40,29 @@ export class ServicesComponent {
   initService() {
     this.serviceToDelete = false;
     this.serviceToEdit = {
-      name: '',
-      description: '',
-      status: false,
-      clients: [],
-      agents: [],
+        name: '',
+        description: '',
+        status: true,
+        clients: [],
+        agents: []
     };
   }
-  customFilter = {
-    first: 0,
-    rows: this.rows,
-    filters: {
-      name: { value: '', matchMode: '' },
-      description: { value: '', matchMode: '' },
-      price: { value: '', matchMode: '' },
-      createdDate: { value: '', matchMode: '' },
-    },
-  };
+
+  customFilter!: Filters ;
 
 
   //OnInit
   ngOnInit(): void {
     this.servicesService
       .getCustomServices(this.customFilter)
-      .subscribe((result: service[]) => {
-        this.services = result;
+      .subscribe((result: Response) => {
+        this.services = result.results;
+        this.servicesLength = result.length;
         this.dataSource = new MatTableDataSource(this.services);
       });
 
-    this.servicesService.getNombreServices().subscribe((result: number) => {
-      const pagenbre = result / this.rows;
+    this.servicesService.getCustomServices(this.customFilter).subscribe((result: Response) => {
+      const pagenbre = result.length / this.rows;
       this.numberOfPages = Math.ceil(pagenbre);
       this.pages = new Array(this.numberOfPages).fill(0).map((x, i) => i + 1);
       if (this.currentPage === 1) {
@@ -73,7 +70,6 @@ export class ServicesComponent {
       }
       this.pages = this.pagesToDisplay;
     });
-
   }
 
 
@@ -88,9 +84,11 @@ export class ServicesComponent {
   //Constructor
   constructor(
     private dialog: MatDialog,
-    private servicesService: ServicesService
+    private servicesService: ServicesService,
+    private filterService:FilterService,
   ) {
     this.dataSource = new MatTableDataSource(this.service);
+    this.customFilter = this.filterService.filters;
   }
 
 
@@ -104,7 +102,7 @@ export class ServicesComponent {
     'action',
   ];
   dataSource: MatTableDataSource<service>;
-  service: service[] = [this.services[0]];
+  service?: service[];
 
 
   //Pagination
@@ -112,20 +110,20 @@ export class ServicesComponent {
   pages:any; //Nombre De Pagination
   pagesToDisplay = [];
   public changePage(number: number) { //Changer La Page Fonction
-
     this.currentPage = number;
     const skip = (number - 1) * this.rows;
     this.customFilter.first = skip;
-
     this.servicesService //Obtenir Data Selon Page
       .getCustomServices(this.customFilter)
-      .subscribe((result: service[]) => {
-        this.services = result;
+      .subscribe((result: Response) => {
+        this.services = result.results;
+        this.servicesLength = result.length;
         this.dataSource = new MatTableDataSource(this.services);
       });
 
-    this.servicesService.getNombreServices().subscribe((result: number) => { //Mouvement Du Pagination
-      const pagenbre = result / this.rows;
+    //Mouvement Du Pagination
+    this.servicesService.getCustomServices(this.customFilter).subscribe((result: Response) => {
+      const pagenbre = result.length / this.rows;
       this.numberOfPages = Math.ceil(pagenbre);
       this.pages = new Array(this.numberOfPages).fill(0).map((x, i) => i + 1);
       if (this.currentPage === 1) {
@@ -150,7 +148,7 @@ export class ServicesComponent {
   //Filter
   showFilter = false;
   selectedColumn: keyof Filters['filters'] = 'name';
-  updateSelectedColumn(column: string) {
+  updateSelectedColumn(column: string) {  //Obtenir La Colone Selectionner Pour CSS Color Style
     switch (column) {
       case 'name':
         this.selectedColumn = 'name';
@@ -184,8 +182,8 @@ export class ServicesComponent {
     dialogRef.afterClosed().subscribe(() => {
       this.servicesService
         .getCustomServices(this.customFilter)
-        .subscribe((result: service[]) => {
-          this.services = result;
+        .subscribe((result: Response) => {
+          this.services = result.results;
           this.dataSource = new MatTableDataSource(this.services);
         });
     });

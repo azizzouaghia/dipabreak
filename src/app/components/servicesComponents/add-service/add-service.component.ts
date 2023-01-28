@@ -19,6 +19,8 @@ export class AddServiceComponent {
   };
   serviceToDelete: boolean = false;
   @Output() serviceChanged = new EventEmitter<service[]>();
+
+
   //Constructor
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -27,11 +29,16 @@ export class AddServiceComponent {
     this.serviceToEdit = data.serviceToEdit || {};
     this.serviceToDelete = data.serviceToDelete || false;
   }
+
+
+  //OnInit
   ngOnInit(): void {
     if (this.data.serviceToEdit) this.serviceToEdit = this.data.serviceToEdit;
     if (this.data.serviceToDelete)
       this.serviceToDelete = this.data.serviceToDelete;
   }
+
+
   //Modifier Une Service
   updateService(service: service) {
     this.servicesService.updateService(service).subscribe();
@@ -40,7 +47,6 @@ export class AddServiceComponent {
   deleteService(service: service) {
     this.servicesService.deleteService(service).subscribe();
   }
-
   //Cree Une Service
   createService(service: service) {
     this.servicesService.createService(service).subscribe((services: service[]) => {
