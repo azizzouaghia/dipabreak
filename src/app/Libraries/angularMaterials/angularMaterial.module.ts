@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {  ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
     imports: [
@@ -23,7 +26,10 @@ import { MatButtonModule } from '@angular/material/button';
         FormsModule,
         MatGridListModule,
         MatDialogModule,
-        MatButtonModule
+        MatButtonModule,
+        MatDatepickerModule,
+        ReactiveFormsModule,
+        MatNativeDateModule
         
     ],
     exports: [
@@ -37,7 +43,10 @@ import { MatButtonModule } from '@angular/material/button';
         FormsModule,
         MatGridListModule,
         MatDialogModule,
-        MatButtonModule
+        MatButtonModule,
+        MatDatepickerModule,
+        ReactiveFormsModule,
+        MatNativeDateModule
     ]
 })
 export class angularMaterialModule {

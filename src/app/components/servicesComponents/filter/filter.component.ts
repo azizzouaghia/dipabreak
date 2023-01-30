@@ -1,6 +1,8 @@
 import { Component, Input ,EventEmitter} from '@angular/core';
 import { FilterService } from 'src/app/services/filter.service';
 import { ServicesComponent } from 'src/app/servicesTable/services.component';
+import { FormGroup, FormControl } from '@angular/forms';
+
 type FilterKeys = keyof Filters['filters'];
 
 interface columnFilter {
@@ -14,7 +16,13 @@ interface columnFilter {
       name: columnFilter;
       description: columnFilter;
       price: columnFilter;
-      createdDate: columnFilter;
+      createdDate: {
+        value: {
+          start:Date;
+          end:Date
+        };
+        matchMode: string;
+      };
     };
   }
 
@@ -36,8 +44,27 @@ export class FilterComponent {
     this.filters = this.filterService.filters;
   }
 
+
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
+
+
   updateMatchMode(event: any) {
-    this.filters.filters[this.column].matchMode = event.value;
+
+    if(event.value==="Filter"){
+      this.filters.filters.createdDate.matchMode = event.value;
+      if (this.range.value.start) {
+          this.filters.filters.createdDate.value.start = this.range.value.start;
+      }
+      if (this.range.value.end) {
+          this.filters.filters.createdDate.value.end = this.range.value.end;
+      }
+    }else{
+      this.filters.filters[this.column].matchMode = event.value;
+    }
+    console.log(this.filters);
     this.servicesComponent.changePage(1);
   }
 }

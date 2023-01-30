@@ -54,7 +54,7 @@
                     <fa-icon
                         [ngStyle]="{color:selectedColumn==='createdDate'?'#3498db':'black'}"
                         class="filter_icon" [icon]="filter_icon" (click)="showFilter = !showFilter"
-                        (click)="updateSelectedColumn('dateCreated')"></fa-icon>
+                        (click)="updateSelectedColumn('createdDate')"></fa-icon>
                 </th>
                 <td mat-cell *matCellDef="let row"> {{row.createdDate}} </td>
             </ng-container>

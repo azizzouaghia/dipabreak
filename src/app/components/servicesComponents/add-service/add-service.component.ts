@@ -2,6 +2,7 @@ import { Component,Inject,Output,EventEmitter,OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { service } from 'src/app/models/service.module';
 import { ServicesService } from 'src/app/services/services.service';
+import { ServicesComponent } from 'src/app/servicesTable/services.component';
 
 @Component({
   selector: 'app-add-service',
@@ -20,16 +21,14 @@ export class AddServiceComponent {
   serviceToDelete: boolean = false;
   @Output() serviceChanged = new EventEmitter<service[]>();
 
-
   //Constructor
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private readonly servicesService: ServicesService
+    private readonly servicesService: ServicesService,
   ) {
     this.serviceToEdit = data.serviceToEdit || {};
     this.serviceToDelete = data.serviceToDelete || false;
   }
-
 
   //OnInit
   ngOnInit(): void {
@@ -37,7 +36,6 @@ export class AddServiceComponent {
     if (this.data.serviceToDelete)
       this.serviceToDelete = this.data.serviceToDelete;
   }
-
 
   //Modifier Une Service
   updateService(service: service) {
@@ -49,8 +47,10 @@ export class AddServiceComponent {
   }
   //Cree Une Service
   createService(service: service) {
-    this.servicesService.createService(service).subscribe((services: service[]) => {
+    this.servicesService
+      .createService(service)
+      .subscribe((services: service[]) => {
         this.serviceChanged.emit(services);
       });
-  }
+    }
 }

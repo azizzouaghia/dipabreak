@@ -15,7 +15,10 @@ export class FilterService {
       name: { value: '', matchMode: '' },
       description: { value: '', matchMode: '' },
       price: { value: '', matchMode: '' },
-      createdDate: { value: '', matchMode: '' },
+      createdDate: { value: {
+        start:new Date(),
+        end:new Date()
+      }, matchMode: '' },
     },
   };
 
