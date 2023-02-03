@@ -1,5 +1,5 @@
 <div class="container p-3 card">
-    <app-filter *ngIf="showFilter" [agentColumn]="selectedColumn"></app-filter>
+    <app-filter *ngIf="showFilter" [check]="filterCheck" [agentColumn]="selectedColumn"></app-filter>
     <div>
         <table mat-table [dataSource]="dataSource" matSort>
 

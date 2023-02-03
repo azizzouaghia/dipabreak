@@ -148,6 +148,7 @@ export class AgentsTableComponent {
 
   //Filter
   showFilter = false;
+  filterCheck = "agent";
 
   selectedColumn: keyof AgentFilter['filters'] = 'name';
   updateSelectedColumn(column: string) {
@@ -182,7 +183,12 @@ export class AgentsTableComponent {
       console.log(`Dialog result: ${result}`);
     });
     dialogRef.afterClosed().subscribe(() => {
-      this.changePage(this.currentPage)
+      this.agentService
+        .getCustomAgents(this.customFilter)
+        .subscribe((result: AgentResponse ) => {
+          this.agents = result.results;
+          this.dataSource = new MatTableDataSource(this.agents);
+        });
     });
   }
 }

@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ServicesdModule } from './servicesTable/services.module';
 import { AgentsTableComponent } from './agents-table/agents-table.component';
+import { InterventionComponent } from './intervention/intervention.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AgentsTableComponent } from './agents-table/agents-table.component';
     DashboardComponent,
     ServicesComponent,
     AgentsTableComponent,
+    InterventionComponent,
   ],
   imports: [
     AppRoutingModule,

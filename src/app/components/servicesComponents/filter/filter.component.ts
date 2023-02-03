@@ -102,6 +102,21 @@ export class FilterComponent {
     }
     //Si on veut filter en agent table
     else if (this.check == 'agent') {
-    }
+      if (event.value === 'Filter') {
+          this.agentFilters.filters.createdDate.matchMode = event.value;
+          if (this.range.value.start) {
+            this.agentFilters.filters.createdDate.value.start =
+              this.range.value.start;
+          }
+          if (this.range.value.end) {
+            this.agentFilters.filters.createdDate.value.end =
+              this.range.value.end;
+          }
+        } else {
+          this.agentFilters.filters[this.agentColumn].matchMode = event.value;
+        }
+        console.log(this.agentFilters);
+        this.agentsComponent.changePage(1);
+      }
   }
 }
