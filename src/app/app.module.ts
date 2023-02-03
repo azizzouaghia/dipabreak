@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ServicesdModule } from './servicesTable/services.module';
+import { AgentsTableComponent } from './agents-table/agents-table.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ServicesdModule } from './servicesTable/services.module';
     LoginComponent,
     DashboardComponent,
     ServicesComponent,
+    AgentsTableComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -35,7 +37,10 @@ import { ServicesdModule } from './servicesTable/services.module';
     DashboardModule,
     ServicesdModule,
   ],
-  providers: [],
+  providers: [
+    ServicesComponent,
+    AgentsTableComponent
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

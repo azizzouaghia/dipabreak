@@ -1,0 +1,75 @@
+.card {
+  margin-top: 105px;
+  margin-bottom: 50px;
+}
+fa-icon {
+  font-size: 17px;
+  cursor: pointer;
+}
+.filter_icon{
+  font-size: 14px;
+  margin-left: 1px;
+}
+.spacing_icon{
+  margin-right: 10px;
+}
+
+.container {
+  width: 100%;
+}
+.filter {
+  margin-bottom: -25px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 17%;
+}
+
+.btn{
+  width: 40px;
+  height: 30px;
+  margin-top: 15px;
+  padding-top: 3px;
+  margin-right: 2px;
+  margin-left: 4px;
+}
+
+.tableFooter nav{
+  padding: 5px;
+  margin-top: 15px;
+  margin-right: 10%;
+  display: flex;
+  justify-content: center;
+}
+
+.page-link {
+  font-size: 15px;
+}
+
+.Addbtn {
+  width: 130px;
+}
+.Addbtn p {
+  margin-left: 2px;
+}
+.nothingFound{
+  text-align: center;
+  margin-top: 20px;
+  color: #95a5a6;
+}
+.status{
+  text-align: center;
+  border-radius: 6px;
+  font-size: 15.9px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

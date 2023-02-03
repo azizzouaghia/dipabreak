@@ -1,67 +1,67 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import { faCircleInfo, faPenToSquare,faTrash,faPlus,faFilter} from '@fortawesome/free-solid-svg-icons';
-import { ServiceFilters } from '../components/servicesComponents/filter/filter.component';
+import { AgentFilter } from '../components/servicesComponents/filter/filter.component';
 import { MatDialog } from '@angular/material/dialog';
-import { AddServiceComponent } from '../components/servicesComponents/add-service/add-service.component';
-import { ServicesService } from '../services/services.service';
-import { service } from '../models/service.module';
+import { AgentService } from '../services/agent.service';
+import { agent } from '../models/agent.module';
 import { environment } from 'src/environments/environment';
 import { Filter } from '../services/filter.service';
-import { ServiceResponse } from '../models/response.module';
+import { AgentResponse } from '../models/response.module';
+import { AddagentComponent } from '../components/dashboardComponents/addagent/addagent.component';
 
 @Component({
-  selector: 'app-services',
-  templateUrl: './services.component.html',
-  styleUrls: ['./services.component.css'],
+  selector: 'app-agents-table',
+  templateUrl: './agents-table.component.html',
+  styleUrls: ['./agents-table.component.css'],
 })
-export class ServicesComponent {
+export class AgentsTableComponent {
   //Les Variables
-  services: service[] = [];
-  serviceToEdit?: service;
-  serviceToDelete: boolean = false;
+  agents: agent[] = [];
+  agentToEdit?: agent;
+  agentToDelete: boolean = false;
   rows = environment.rows;
   numberOfPages = 0;
-  servicesLength = 0;
+  agentsLength = 0;
 
   //Services Fonction
-  updateServicesList(services: service[]) {
-    this.services = services;
+  updateAgentsList(agents: agent[]) {
+    this.agents = agents;
   }
-  editService(service: service) {
-    this.serviceToDelete = false;
-    this.serviceToEdit = service;
+  editAgent(agent: agent) {
+    this.agentToDelete = false;
+    this.agentToEdit = agent;
   }
-  deleteService(service: service) {
-    this.serviceToDelete = true;
-    this.serviceToEdit = service;
+  deleteAgent(agent: agent) {
+    this.agentToDelete = true;
+    this.agentToEdit = agent;
   }
   initService() {
-    this.serviceToDelete = false;
-    this.serviceToEdit = {
+    this.agentToDelete = false;
+    this.agentToEdit = {
       name: '',
-      description: '',
+      email: '',
+      password: '',
       status: true,
-      clients: [],
-      agents: [],
+      services: [],
     };
   }
 
-  customFilter!: ServiceFilters;
+  customFilter!: AgentFilter;
 
   //OnInit
   ngOnInit(): void {
-    this.servicesService
-      .getCustomServices(this.customFilter)
-      .subscribe((result: ServiceResponse) => {
-        this.services = result.results;
-        this.servicesLength = result.length;
-        this.dataSource = new MatTableDataSource(this.services);
+    this.agentService
+      .getCustomAgents(this.customFilter)
+      .subscribe((result: AgentResponse) => {
+        this.agents = result.results;
+        this.agentsLength = result.length;
+        this.dataSource = new MatTableDataSource(this.agents);
       });
 
-    this.servicesService
-      .getCustomServices(this.customFilter)
-      .subscribe((result: ServiceResponse) => {
+    this.agentService
+      .getCustomAgents(this.customFilter)
+      .subscribe((result: AgentResponse) => {
         const pagenbre = result.length / this.rows;
         this.numberOfPages = Math.ceil(pagenbre);
         this.pages = new Array(this.numberOfPages).fill(0).map((x, i) => i + 1);
@@ -82,24 +82,24 @@ export class ServicesComponent {
   //Constructor
   constructor(
     private dialog: MatDialog,
-    private servicesService: ServicesService,
-    private filterService: Filter
+    private agentService: AgentService,
+    private filter: Filter
   ) {
     this.dataSource = new MatTableDataSource(this.service);
-    this.customFilter = this.filterService.servicefilters;
+    this.customFilter = this.filter.agentfilters;
   }
 
   //Table
   displayedColumns: string[] = [
     'id',
     'name',
-    'description',
-    'price',
+    'email',
+    'status',
     'createdDate',
     'action',
   ];
-  dataSource: MatTableDataSource<service>;
-  service?: service[];
+  dataSource: MatTableDataSource<agent>;
+  service?: agent[];
 
   //Pagination
   currentPage = 1; //page actuelle
@@ -110,18 +110,18 @@ export class ServicesComponent {
     this.currentPage = number;
     const skip = (number - 1) * this.rows;
     this.customFilter.first = skip;
-    this.servicesService //Obtenir Data Selon Page
-      .getCustomServices(this.customFilter)
-      .subscribe((result: ServiceResponse) => {
-        this.services = result.results;
-        this.servicesLength = result.length;
-        this.dataSource = new MatTableDataSource(this.services);
+    this.agentService //Obtenir Data Selon Page
+      .getCustomAgents(this.customFilter)
+      .subscribe((result: AgentResponse) => {
+        this.agents = result.results;
+        this.agentsLength = result.length;
+        this.dataSource = new MatTableDataSource(this.agents);
       });
 
     //Mouvement Du Pagination
-    this.servicesService
-      .getCustomServices(this.customFilter)
-      .subscribe((result: ServiceResponse) => {
+    this.agentService
+      .getCustomAgents(this.customFilter)
+      .subscribe((result: AgentResponse) => {
         const pagenbre = result.length / this.rows;
         this.numberOfPages = Math.ceil(pagenbre);
         this.pages = new Array(this.numberOfPages).fill(0).map((x, i) => i + 1);
@@ -148,19 +148,19 @@ export class ServicesComponent {
 
   //Filter
   showFilter = false;
-  checkFilter = 'service';
-  selectedColumn: keyof ServiceFilters['filters'] = 'name';
+
+  selectedColumn: keyof AgentFilter['filters'] = 'name';
   updateSelectedColumn(column: string) {
     //Obtenir La Colone Selectionner Pour CSS Color Style
     switch (column) {
       case 'name':
         this.selectedColumn = 'name';
         break;
-      case 'description':
-        this.selectedColumn = 'description';
+      case 'email':
+        this.selectedColumn = 'email';
         break;
-      case 'price':
-        this.selectedColumn = 'price';
+      case 'status':
+        this.selectedColumn = 'status';
         break;
       case 'createdDate':
         this.selectedColumn = 'createdDate';
@@ -172,22 +172,17 @@ export class ServicesComponent {
 
   //Dialogue Fonction Return AddServiceComponent
   openDialog() {
-    const dialogRef = this.dialog.open(AddServiceComponent, {
+    const dialogRef = this.dialog.open(AddagentComponent, {
       data: {
-        serviceToEdit: this.serviceToEdit,
-        serviceToDelete: this.serviceToDelete,
+        agentToEdit: this.agentToEdit,
+        agentToDelete: this.agentToDelete,
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
     dialogRef.afterClosed().subscribe(() => {
-      this.servicesService
-        .getCustomServices(this.customFilter)
-        .subscribe((result: ServiceResponse) => {
-          this.services = result.results;
-          this.dataSource = new MatTableDataSource(this.services);
-        });
+      this.changePage(this.currentPage)
     });
   }
 }

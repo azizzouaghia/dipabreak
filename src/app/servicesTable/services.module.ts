@@ -9,7 +9,7 @@ import { AddServiceComponent } from '../components/servicesComponents/add-servic
 @NgModule({
     declarations: [
         FilterComponent,
-        AddServiceComponent
+        AddServiceComponent,
     ],
     imports: [
         FontAwesomeModule,

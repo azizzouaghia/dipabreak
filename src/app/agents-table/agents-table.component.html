@@ -1,0 +1,97 @@
+<div class="container p-3 card">
+    <app-filter *ngIf="showFilter" [agentColumn]="selectedColumn"></app-filter>
+    <div>
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Id
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.agentId}} </td>
+            </ng-container>
+
+            <!-- NAME Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Name
+                    <fa-icon [ngStyle]="{color:selectedColumn==='name'?'#3498db':'black'}" class="filter_icon"
+                        [icon]="filter_icon" (click)="showFilter = !showFilter"
+                        (click)="updateSelectedColumn('name')"></fa-icon>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+            </ng-container>
+
+            <!-- Email Column -->
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Email
+                    <fa-icon [ngStyle]="{color:selectedColumn==='email'?'#3498db':'black'}" class="filter_icon"
+                        [icon]="filter_icon" (click)="showFilter = !showFilter"
+                        (click)="updateSelectedColumn('email')"></fa-icon>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+            </ng-container>
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Status
+                    <fa-icon [ngStyle]="{color:selectedColumn==='status'?'#3498db':'black'}" class="filter_icon"
+                        [icon]="filter_icon" (click)="showFilter = !showFilter"
+                        (click)="updateSelectedColumn('status')"></fa-icon>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <h4 *ngIf="row.status" style="color:#27ae60;background-color: #2ecc701a;" class="status">Active</h4>
+                    <h4 *ngIf="!row.status" style="color:#e74c3c;background-color: rgba(231, 77, 60, 0.082);" class="status">Inactive</h4>
+                </td>
+            </ng-container>
+
+            <!-- createdDate Column -->
+            <ng-container matColumnDef="createdDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Date
+                    <fa-icon [ngStyle]="{color:selectedColumn==='createdDate'?'#3498db':'black'}" class="filter_icon"
+                        [icon]="filter_icon" (click)="showFilter = !showFilter"
+                        (click)="updateSelectedColumn('createdDate')"></fa-icon>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.createdDate}} </td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                <td mat-cell *matCellDef="let row">
+                    <fa-icon (click)="editAgent(row);openDialog()" title="edit" style="color:#e67e22"
+                        class="spacing_icon" [icon]="edit_icon"></fa-icon>
+                    <fa-icon (click)="deleteAgent(row);openDialog()" title="remove" style="color:#e74c3c"
+                        [icon]="delete_icon"></fa-icon>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <h1 *ngIf="agentsLength<=0" class="nothingFound">Nothing Found</h1>
+        <div class="tableFooter">
+            <nav *ngIf="agentsLength>0">
+                <ul class="pagination">
+                    <li *ngIf="(currentPage-1)>=1" class="page-item"><a (click)="changePage(currentPage-1)"
+                            class="page-link">
+                            < </a>
+                    </li>
+                    <li class="page-item" *ngFor="let i of pages; let idx = index">
+                        <a (click)="changePage(i)" [ngClass]="{'active': i === currentPage}" class="page-link">{{ i
+                            }}</a>
+                    </li>
+                    <li *ngIf="(currentPage+1)<=numberOfPages" class="page-item"><a (click)="changePage(currentPage+1)"
+                            class="page-link"> > </a></li>
+                </ul>
+            </nav>
+            <button (click)="initService();openDialog()" type="button" class="btn Addbtn btn-outline-success d-flex">
+                <fa-icon class="add_icon" [icon]="add_icon"></fa-icon>
+                <p>Add Agent</p>
+            </button>
+        </div>
+    </div>
+</div>

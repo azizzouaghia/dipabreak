@@ -1,15 +1,42 @@
 import { Component, Input ,EventEmitter} from '@angular/core';
-import { FilterService } from 'src/app/services/filter.service';
+import { Filter } from 'src/app/services/filter.service';
 import { ServicesComponent } from 'src/app/servicesTable/services.component';
 import { FormGroup, FormControl } from '@angular/forms';
+import { AgentsTableComponent } from 'src/app/agents-table/agents-table.component';
 
-type FilterKeys = keyof Filters['filters'];
+type ServiceFilterKeys = keyof ServiceFilters['filters'];
+type AgentFilterKeys = keyof AgentFilter['filters'];
 
+//Interface commun entre agent et service filter
 interface columnFilter {
   value: string;
   matchMode: string;
 }
-  interface Filters {
+
+//interface agent filter
+interface AgentFilter {
+    first: number;
+    rows: number;
+    filters: {
+      name: columnFilter;
+      email: columnFilter;
+      phone: columnFilter;
+      latitude:columnFilter;
+      longitude:columnFilter;
+      status:columnFilter;
+      service:columnFilter;    
+      createdDate: {
+        value: {
+          start:Date;
+          end:Date
+        };
+        matchMode: string;
+      };
+    };
+  }
+
+//interface service filter
+interface ServiceFilters {
     first: number;
     rows: number;
     filters: {
@@ -26,7 +53,7 @@ interface columnFilter {
     };
   }
 
-export { Filters, FilterKeys };
+export { ServiceFilters, AgentFilter, ServiceFilterKeys, AgentFilterKeys };
 
 @Component({
   selector: 'app-filter',
@@ -34,37 +61,47 @@ export { Filters, FilterKeys };
   styleUrls: ['./filter.component.css'],
 })
 export class FilterComponent {
-  @Input() column!: FilterKeys;
-  filters!: Filters;
+  @Input() column!: ServiceFilterKeys;
+  @Input() agentColumn!: AgentFilterKeys;
+  @Input() check!: string;
+  serviceFilters!: ServiceFilters;
+  agentFilters!: AgentFilter;
 
   constructor(
-    private filterService: FilterService,
-    private servicesComponent: ServicesComponent
+    private filter: Filter,
+    private servicesComponent: ServicesComponent,
+    private agentsComponent: AgentsTableComponent
   ) {
-    this.filters = this.filterService.filters;
+    this.serviceFilters = this.filter.servicefilters;
+    this.agentFilters = this.filter.agentfilters;
   }
-
 
   range = new FormGroup({
     start: new FormControl<Date | null>(null),
     end: new FormControl<Date | null>(null),
   });
 
-
   updateMatchMode(event: any) {
-
-    if(event.value==="Filter"){
-      this.filters.filters.createdDate.matchMode = event.value;
-      if (this.range.value.start) {
-          this.filters.filters.createdDate.value.start = this.range.value.start;
+    //Si on veut filter en service table
+    if (this.check == 'service') {
+      if (event.value === 'Filter') {
+        this.serviceFilters.filters.createdDate.matchMode = event.value;
+        if (this.range.value.start) {
+          this.serviceFilters.filters.createdDate.value.start =
+            this.range.value.start;
+        }
+        if (this.range.value.end) {
+          this.serviceFilters.filters.createdDate.value.end =
+            this.range.value.end;
+        }
+      } else {
+        this.serviceFilters.filters[this.column].matchMode = event.value;
       }
-      if (this.range.value.end) {
-          this.filters.filters.createdDate.value.end = this.range.value.end;
-      }
-    }else{
-      this.filters.filters[this.column].matchMode = event.value;
+      console.log(this.serviceFilters);
+      this.servicesComponent.changePage(1);
     }
-    console.log(this.filters);
-    this.servicesComponent.changePage(1);
+    //Si on veut filter en agent table
+    else if (this.check == 'agent') {
+    }
   }
 }

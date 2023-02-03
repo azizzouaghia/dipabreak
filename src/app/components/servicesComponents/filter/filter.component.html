@@ -1,5 +1,5 @@
 <div class="filter d-flex">
-<input type="text" *ngIf="column !== 'createdDate'" [(ngModel)]="filters.filters[this.column].value" class="form-control">
+<input type="text" *ngIf="column !== 'createdDate'" [(ngModel)]="serviceFilters.filters[this.column].value" class="form-control">
 
 <!--Filter Par Date Début-->
 <mat-form-field *ngIf="column == 'createdDate'" appearance="fill">
@@ -15,7 +15,6 @@
     <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
 </mat-form-field>
 <!--Filter Par Date Fin-->
-
     <mat-chip-listbox (change)="updateMatchMode($event)" aria-label="Fish selection">
         <mat-chip-option *ngIf="column !== 'price' && column !== 'createdDate'">Start with</mat-chip-option>
         <mat-chip-option *ngIf="column !== 'price' && column !== 'createdDate'">Contains</mat-chip-option>
