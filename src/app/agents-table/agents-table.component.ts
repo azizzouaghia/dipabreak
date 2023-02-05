@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import { faCircleInfo, faPenToSquare,faTrash,faPlus,faFilter} from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo, faPenToSquare,faTrash,faPlus,faFilter,faSquarePlus} from '@fortawesome/free-solid-svg-icons';
 import { AgentFilter } from '../components/servicesComponents/filter/filter.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AgentService } from '../services/agent.service';
@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { Filter } from '../services/filter.service';
 import { AgentResponse } from '../models/response.module';
 import { AddagentComponent } from '../components/dashboardComponents/addagent/addagent.component';
+import { AddServiceToAgentComponent } from '../components/agentComponents/add-service-to-agent/add-service-to-agent.component';
 
 @Component({
   selector: 'app-agents-table',
@@ -78,6 +79,7 @@ export class AgentsTableComponent {
   delete_icon = faTrash;
   add_icon = faPlus;
   filter_icon = faFilter;
+  addService_icon = faSquarePlus;
 
   //Constructor
   constructor(
@@ -148,7 +150,7 @@ export class AgentsTableComponent {
 
   //Filter
   showFilter = false;
-  filterCheck = "agent";
+  filterCheck = 'agent';
 
   selectedColumn: keyof AgentFilter['filters'] = 'name';
   updateSelectedColumn(column: string) {
@@ -171,7 +173,8 @@ export class AgentsTableComponent {
     }
   }
 
-  //Dialogue Fonction Return AddServiceComponent
+  //Icons Fonctions
+  //Supprimer,Modifier Dialog
   openDialog() {
     const dialogRef = this.dialog.open(AddagentComponent, {
       data: {
@@ -185,10 +188,24 @@ export class AgentsTableComponent {
     dialogRef.afterClosed().subscribe(() => {
       this.agentService
         .getCustomAgents(this.customFilter)
-        .subscribe((result: AgentResponse ) => {
+        .subscribe((result: AgentResponse) => {
           this.agents = result.results;
           this.dataSource = new MatTableDataSource(this.agents);
         });
+    });
+  }
+  //Ajouter Une Service A Un Agent Dialog
+  addServiceDialog() {
+    const dialogRef = this.dialog.open(AddServiceToAgentComponent, {
+      data: {
+        agentToEdit: this.agentToEdit,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+    dialogRef.afterClosed().subscribe(() => {
+    //Apres Fermer Le Dialog
     });
   }
 }

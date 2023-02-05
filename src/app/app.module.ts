@@ -16,6 +16,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { ServicesdModule } from './servicesTable/services.module';
 import { AgentsTableComponent } from './agents-table/agents-table.component';
 import { InterventionComponent } from './intervention/intervention.component';
+import { AddServiceToAgentComponent } from './components/agentComponents/add-service-to-agent/add-service-to-agent.component';
+import { ClientFormComponent } from './client-form/client-form.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { InterventionComponent } from './intervention/intervention.component';
     ServicesComponent,
     AgentsTableComponent,
     InterventionComponent,
+    AddServiceToAgentComponent,
+    ClientFormComponent,
   ],
   imports: [
     AppRoutingModule,

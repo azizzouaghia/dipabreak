@@ -1,0 +1,29 @@
+h2 {
+    text-align: center;
+}
+.form {
+    margin-left: 150px;
+}
+
+button {
+    clear: both;
+    display: block;
+    margin: 20px auto;
+}
+
+.form-group:last-of-type {
+    margin-bottom: 30px;
+}
+
+.form-group {
+    width: 370px;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 15px;
+}
+
+.alert {
+    text-align: center;
+    width: 50%;
+    margin: 20px auto;
+}

@@ -1,3 +1,5 @@
+import { service } from "./service.module";
+
 export class agent {
     agentId?: string;
     name: string = '';
@@ -8,5 +10,5 @@ export class agent {
     password?:string='';
     status: boolean = true;
     createdDate?: Date;
-    services: string[] = [];
+    services?: service[];
 }   

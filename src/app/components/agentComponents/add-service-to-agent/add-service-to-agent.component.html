@@ -1,0 +1,11 @@
+<mat-dialog-content class="mat-typography">
+<div class="container">
+    <label for="inputId" [(ngModel)]="serviceId" class="form-label">Service Id</label>
+    <input type="text" [(ngModel)]="serviceId" id="inputId" class="form-control">
+</div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button  [mat-dialog-close]="true" (click)="addServiceToAgent()" cdkFocusInitial>Add</button>
+</mat-dialog-actions>

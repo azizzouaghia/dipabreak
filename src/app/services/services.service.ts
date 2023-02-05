@@ -18,6 +18,12 @@ export class ServicesService {
       service
     );
   }
+  //Obtenir une Service Avec serviceId
+  public getServiceById(serviceId: string): Observable<service> {
+    return this.http.get<service>(
+      `${environment.apiUrl}/${this.url}/${serviceId}`
+    );
+  }
   //Supprimer Une Service
   public deleteService(service: service) {
     return this.http.delete<service[]>(

@@ -21,6 +21,13 @@ export class AgentService {
     );
   }
 
+  //Ajouter Une Service A Un Agent
+  public addServiceToAgent(agentId: any, serviceId: string) : Observable<agent[]> {
+    return this.http.get<agent[]>(
+      `${environment.apiUrl}/${this.url}/addService/${JSON.stringify({agentId:agentId,serviceId:serviceId})}`
+    );  
+  }
+
   //Supprimer Un Agent
   public deleteAgent(agent: agent) {
     return this.http.delete<agent[]>(
@@ -30,10 +37,7 @@ export class AgentService {
 
   //Cree Un Agent
   public createAgent(agent: agent): Observable<agent[]> {
-    return this.http.post<agent[]>(
-      `${environment.apiUrl}/${this.url}`,
-      agent
-    );
+    return this.http.post<agent[]>(`${environment.apiUrl}/${this.url}`, agent);
   }
 
   //Obtenir Les Agents En Utilisant Filter
@@ -42,5 +46,4 @@ export class AgentService {
       `${environment.apiUrl}/${this.url}/filter/${JSON.stringify(customFilter)}`
     );
   }
-
 }
